@@ -1,0 +1,30 @@
+﻿@model Beicola.Models.Cities
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Cities</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nm_City)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nm_City)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.St_City)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.St_City)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_City">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

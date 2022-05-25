@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Beicola.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Subcat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nm_Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vl_Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ds_Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Av_Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pic_Prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.St_Prod)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Subcat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nm_Prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vl_Prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ds_Prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Av_Prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pic_Prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.St_Prod)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Prod">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Prod">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Prod">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
