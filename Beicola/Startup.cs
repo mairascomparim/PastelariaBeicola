@@ -27,8 +27,10 @@ namespace Beicola
         {
             services.AddControllersWithViews();
 
+            var connection = Configuration["ConnectionStrings:BeicolaContext"];
             services.AddDbContext<BeicolaContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("BeicolaContext")));
+            options.UseMySql(connection, ServerVersion.AutoDetect(connection))
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

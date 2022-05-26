@@ -10,85 +10,85 @@ using Beicola.Models;
 
 namespace Beicola.Controllers
 {
-    public class CategorieController : Controller
+    public class SettingsController : Controller
     {
         private readonly BeicolaContext _context;
 
-        public CategorieController(BeicolaContext context)
+        public SettingsController(BeicolaContext context)
         {
             _context = context;
         }
 
-        // GET: Categorie
+        // GET: Settings
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Categorie.ToListAsync());
+              return View(await _context.Settings.ToListAsync());
         }
 
-        // GET: Categorie/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Settings/Details/5
+        public async Task<IActionResult> Details(decimal? id)
         {
-            if (id == null || _context.Categorie == null)
+            if (id == null || _context.Settings == null)
             {
                 return NotFound();
             }
 
-            var categorie = await _context.Categorie
-                .FirstOrDefaultAsync(m => m.Id_Cat == id);
-            if (categorie == null)
+            var settings = await _context.Settings
+                .FirstOrDefaultAsync(m => m.Vl_Freight == id);
+            if (settings == null)
             {
                 return NotFound();
             }
 
-            return View(categorie);
+            return View(settings);
         }
 
-        // GET: Categorie/Create
+        // GET: Settings/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categorie/Create
+        // POST: Settings/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Cat,Nm_Cat,St_Cat")] Categorie categorie)
+        public async Task<IActionResult> Create([Bind("Vl_Freight,Is_open")] Settings settings)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categorie);
+                _context.Add(settings);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categorie);
+            return View(settings);
         }
 
-        // GET: Categorie/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Settings/Edit/5
+        public async Task<IActionResult> Edit(decimal? id)
         {
-            if (id == null || _context.Categorie == null)
+            if (id == null || _context.Settings == null)
             {
                 return NotFound();
             }
 
-            var categorie = await _context.Categorie.FindAsync(id);
-            if (categorie == null)
+            var settings = await _context.Settings.FindAsync(id);
+            if (settings == null)
             {
                 return NotFound();
             }
-            return View(categorie);
+            return View(settings);
         }
 
-        // POST: Categorie/Edit/5
+        // POST: Settings/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Cat,Nm_Cat,St_Cat")] Categorie categorie)
+        public async Task<IActionResult> Edit(decimal id, [Bind("Vl_Freight,Is_open")] Settings settings)
         {
-            if (id != categorie.Id_Cat)
+            if (id != settings.Vl_Freight)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Beicola.Controllers
             {
                 try
                 {
-                    _context.Update(categorie);
+                    _context.Update(settings);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategorieExists(categorie.Id_Cat))
+                    if (!SettingsExists(settings.Vl_Freight))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace Beicola.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(categorie);
+            return View(settings);
         }
 
-        // GET: Categorie/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Settings/Delete/5
+        public async Task<IActionResult> Delete(decimal? id)
         {
-            if (id == null || _context.Categorie == null)
+            if (id == null || _context.Settings == null)
             {
                 return NotFound();
             }
 
-            var categorie = await _context.Categorie
-                .FirstOrDefaultAsync(m => m.Id_Cat == id);
-            if (categorie == null)
+            var settings = await _context.Settings
+                .FirstOrDefaultAsync(m => m.Vl_Freight == id);
+            if (settings == null)
             {
                 return NotFound();
             }
 
-            return View(categorie);
+            return View(settings);
         }
 
-        // POST: Categorie/Delete/5
+        // POST: Settings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(decimal id)
         {
-            if (_context.Categorie == null)
+            if (_context.Settings == null)
             {
-                return Problem("Entity set 'BeicolaContext.Categorie'  is null.");
+                return Problem("Entity set 'BeicolaContext.Settings'  is null.");
             }
-            var categorie = await _context.Categorie.FindAsync(id);
-            if (categorie != null)
+            var settings = await _context.Settings.FindAsync(id);
+            if (settings != null)
             {
-                _context.Categorie.Remove(categorie);
+                _context.Settings.Remove(settings);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategorieExists(int id)
+        private bool SettingsExists(decimal id)
         {
-          return _context.Categorie.Any(e => e.Id_Cat == id);
+          return _context.Settings.Any(e => e.Vl_Freight == id);
         }
     }
 }
